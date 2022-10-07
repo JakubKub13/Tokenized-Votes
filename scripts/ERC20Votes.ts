@@ -29,13 +29,23 @@ async function main() {
     console.log(`Voting power of account 1 after self-delegation is ${ethers.utils.formatEther(account1VotingPowerAfterDelegation)}`);
     const currentBlock = await ethers.provider.getBlock("latest");
     console.log(`The current block number is ${currentBlock.number}`);
+    const mintTx2 = await myErc20Vote.mint(account2.address, TOKENS_MINTED);
+    await mintTx2.wait();
+    const currentBlock2 = await ethers.provider.getBlock("latest");
+    console.log(`The current block number is ${currentBlock2.number}`);
+    const mintTx3 = await myErc20Vote.mint(account2.address, TOKENS_MINTED);
+    await mintTx3.wait();
+    const currentBlock3 = await ethers.provider.getBlock("latest");
+    console.log(`The current block number is ${currentBlock3.number}`);
     /// Get result from a lot of Promises at once
     const pastVotesAcc1 = await Promise.all([
+        await myErc20Vote.getPastVotes(account1.address, 4),
         await myErc20Vote.getPastVotes(account1.address, 3),
         await myErc20Vote.getPastVotes(account1.address, 2),
         await myErc20Vote.getPastVotes(account1.address, 1),
         await myErc20Vote.getPastVotes(account1.address, 0),
     ]);
+    console.log({ pastVotesAcc1 })
 } 
 
 main().catch((error) => {
