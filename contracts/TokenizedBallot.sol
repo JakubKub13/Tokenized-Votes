@@ -24,4 +24,18 @@ contract TokenizedBallot {
         tokenContract = ITokenizedVotes(_voteTokenContract);
         referenceBlock = _referenceBlock;
     }
+
+    function winningProposal() public view returns (uint256 winningProposal_) {
+        uint256 winningVoteCount = 0;
+        for (uint256 p = 0; p < proposals.length; p++) {
+            if (proposals[p].voteCount > winningVoteCount) {
+                winningVoteCount = proposals[p].voteCount;
+                winningProposal_ = p;
+            }
+        }
+    }
+
+    function winnerName() external view returns (bytes32 winnerName_) {
+        winnerName_ = proposals[winningProposal()].name;
+    }
 }
