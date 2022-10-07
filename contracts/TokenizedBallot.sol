@@ -2,7 +2,7 @@
 pragma solidity ^0.8.17;
 
 interface ITokenizedVotes {
-    function getPastVotes(address, uint256) external view retuns (uint256);
+    function getPastVotes(address, uint256) external view returns (uint256);
 }
 
 contract TokenizedBallot {
@@ -16,6 +16,7 @@ contract TokenizedBallot {
     }
 
     Proposal[] public proposals;
+    mapping(address => uint256) public votePowerSpent;
 
     constructor(bytes32[] memory proposalNames, address _voteTokenContract, uint256 _referenceBlock) {
         for (uint256 i = 0; i < proposalNames.length; i++) {
@@ -28,12 +29,13 @@ contract TokenizedBallot {
 /// I can vote to a proposal and vote that amount in that proposal if I have 100 votes I can divide 50 votes for 1 50 votes for other
     function vote(uint256 proposal, uint256 amount) public {
         uint256 votingPower = votePower(msg.sender);
-        require(votingPower >= amount);
+        require(votingPower <= amount, "TokenizedBallot: Trying to vote with more vote than vote power available for this account");
+        votePowerSpent[msg.sender] += amount;
         proposals[proposal].voteCount += amount;
     }
 
     function votePower(address account) public view returns (uint256 votePower_) {
-        votePower_ = tokenContract.getPastVotes(account, referenceBlock);
+        votePower_ = tokenContract.getPastVotes(account, referenceBlock) - votePowerSpent[account];
     } 
 
     function winningProposal() public view returns (uint256 winningProposal_) {
