@@ -16,10 +16,7 @@ async function main() {
     const mintTx = await myErc20Vote.mint(account1.address, TOKENS_MINTED);
     await mintTx.wait();
     const totalSupplyAfterMint = await myErc20Vote.totalSupply();
-    console.log(`The total supply of this contract after minting is ${totalSupplyAfterMint}`);
-
-
-
+    console.log(`The total supply of this contract after minting is ${ethers.utils.formatEther(totalSupplyAfterMint)}`);
 } 
 
 main().catch((error) => {
