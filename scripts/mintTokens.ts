@@ -14,7 +14,8 @@ async function main() {
     let deployerInitBalanceFormatted = deployerInitBalance.toNumber();
     console.log(`Initial balance of deployer address is : ${deployerInitBalanceFormatted}`);
     
-    await myErc20Vote.mint(deployer.address, MINTING_AMOUNT);
+    const mintTx1 = await myErc20Vote.mint(deployer.address, MINTING_AMOUNT);
+    await mintTx1.wait()
     let deployerAfterMintBalance = await myErc20Vote.balanceOf(deployer.address);
     let deployerAfterMintBalFormatted = deployerAfterMintBalance.toNumber();
     console.log(`Balance of deployer after first mint is : ${deployerAfterMintBalFormatted}`);
@@ -23,7 +24,8 @@ async function main() {
     let acc1InitBalFormatted = acc1InitBalance.toNumber();
     console.log(`Initial balance of account 1 is : ${acc1InitBalFormatted}`);
 
-    await myErc20Vote.mint(account1.address, MINTING_AMOUNT);
+    const mintTx2 = await myErc20Vote.mint(account1.address, MINTING_AMOUNT);
+    await mintTx2.wait();
     let acc1BalAfterMint = await myErc20Vote.balanceOf(account1.address);
     let acc1BalAfterMintFormatted = acc1BalAfterMint.toNumber();
     console.log(`Balance of account 1 after first minting is: ${acc1BalAfterMintFormatted}`);

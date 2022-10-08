@@ -12,7 +12,8 @@ async function main() {
     let deployerInitVotesFormatted = deployerInitVotes.toNumber();
     console.log(`Deployer initial votes before delegation are: ${deployerInitVotesFormatted}`);
 
-    await myErc20Vote.delegate(deployer.address);
+    const delegateTx1 = await myErc20Vote.delegate(deployer.address);
+    await delegateTx1.wait();
     let deployerVotesAfterDel = await myErc20Vote.getVotes(deployer.address);
     let deployerVotesAfterDelFormatted = deployerVotesAfterDel.toNumber();
     console.log(`Deployer votes after self-delegation are: ${deployerVotesAfterDelFormatted}`);
@@ -21,7 +22,8 @@ async function main() {
     let Account1InitVotesFormatted = Account1InitVotes.toNumber();
     console.log(`Account 1 initial votes before delegation are: ${Account1InitVotesFormatted}`);
 
-    await myErc20Vote.connect(account1).delegate(account1.address);
+    const delegateTx2 = await myErc20Vote.connect(account1).delegate(account1.address);
+    await delegateTx2.wait();
     let acc1VotesAfterDel = await myErc20Vote.getVotes(account1.address);
     let acc1VotesAfterDelFormatted = acc1VotesAfterDel.toNumber();
     console.log(`Account 1 votes after self-delegation are: ${acc1VotesAfterDelFormatted}`);
