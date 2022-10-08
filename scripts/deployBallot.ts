@@ -16,7 +16,7 @@ async function main() {
   
   const [deployer] = await ethers.getSigners();
   const tokenizedBallotFactory = await ethers.getContractFactory("TokenizedBallot");
-  const tokenizedBallot = await tokenizedBallotFactory.deploy(convertStringArrayToBytes32(PROPOSALS), "0x5FbDB2315678afecb367f032d93F642f64180aa3", 0);
+  const tokenizedBallot = await tokenizedBallotFactory.deploy(convertStringArrayToBytes32(PROPOSALS), "0x5FbDB2315678afecb367f032d93F642f64180aa3", 1);
   await tokenizedBallot.deployed();
   console.log(`Tokenized Ballot contract was deployed ad : ${tokenizedBallot.address}`);
 }
