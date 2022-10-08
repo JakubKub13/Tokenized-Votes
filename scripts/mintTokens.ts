@@ -8,7 +8,7 @@ async function main() {
     let myErc20Vote: MyERC20Vote;
     const MINTING_AMOUNT = 1;
 
-    const [deployer, account1, account2] = await ethers.getSigners();
+    const [deployer, account1] = await ethers.getSigners();
     myErc20Vote = await ethers.getContractAt("MyERC20Vote", "0x5FbDB2315678afecb367f032d93F642f64180aa3", deployer);
     let deployerInitBalance = await myErc20Vote.balanceOf(deployer.address);
     let deployerInitBalanceFormatted = deployerInitBalance.toNumber();
