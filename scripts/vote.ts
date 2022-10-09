@@ -23,7 +23,6 @@ async function main() {
         "function votePower(address account) public view returns (uint256 votePower_)",
         "function winningProposal() public view returns (uint256 winningProposal_)",
         "function winnerName() external view returns (bytes32 winnerName_)",
-        
     ];
 
     let deployer = new ethers.Wallet(privateKey1, provider);
@@ -59,8 +58,6 @@ async function main() {
     const indexWinner = await tokenizedBallot.winningProposal();
     console.log(winner);
     console.log(indexWinner.toString());
-    
-    
     
 }
 

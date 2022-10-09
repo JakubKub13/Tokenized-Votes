@@ -6,22 +6,8 @@ import { providers } from "ethers";
 
 
 async function main() {
-    const PROPOSALS = ["Proposal 1", "Proposal 2", "Proposal 3"];
+  
 
-    function convertStringArrayToBytes32(array: string[]) {
-        const bytes32Array = [];
-        for (let index = 0; index < array.length; index++) {
-          bytes32Array.push(ethers.utils.formatBytes32String(array[index]));
-        }
-        return bytes32Array;
-      }
-
-    const bytes32Props = convertStringArrayToBytes32(PROPOSALS)
-    const chainId = network.config.chainId;
-    const tokenAddr = networkConfig[chainId]["myERC20Vote"];
-    console.log(bytes32Props, tokenAddr, 7740650)
-    
-    
 }
 
 

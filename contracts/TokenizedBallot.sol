@@ -36,7 +36,7 @@ contract TokenizedBallot {
 
     function votePower(address account) public view returns (uint256 votePower_) {
         votePower_ = tokenContract.getPastVotes(account, referenceBlock) - votePowerSpent[account];
-    } 
+    }
 
     function winningProposal() public view returns (uint256 winningProposal_) {
         uint256 winningVoteCount = 0;
