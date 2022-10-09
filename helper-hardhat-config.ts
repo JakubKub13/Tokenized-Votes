@@ -1,6 +1,7 @@
 export interface networkConfigItem {
     name?: string
     myERC20Vote?: string 
+    tokenizedBallot?: string
   }
 export interface networkConfigInfo {
     [key: number]: networkConfigItem
@@ -15,6 +16,7 @@ export const networkConfig: networkConfigInfo = {
     5: {
         name: "goerli",
         myERC20Vote: "0x9828c2Ad0A705F3E8D21FE31A1a5edBFDfc67e1f",
+        tokenizedBallot: "0xde2e9c4d7adE0F9128718466380B71b4302293fc",
     },
 
     1: {
