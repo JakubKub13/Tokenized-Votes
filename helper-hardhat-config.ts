@@ -1,5 +1,6 @@
 export interface networkConfigItem {
-    name?: string 
+    name?: string
+    myERC20Vote?: string 
   }
 export interface networkConfigInfo {
     [key: number]: networkConfigItem
