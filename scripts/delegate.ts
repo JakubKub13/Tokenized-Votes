@@ -1,38 +1,38 @@
-import { ethers, network } from "hardhat";
+import { Contract, ethers } from "ethers";
+import { network } from "hardhat";
 import * as dotenv from "dotenv";
 import { MyERC20Vote } from "../typechain-types";
 dotenv.config();
 import { developmentChains, networkConfig } from "../helper-hardhat-config";
 
 async function main() {
+    const provider = new ethers.providers.JsonRpcProvider(process.env.GOERLI_RPC_URL)
+    const privateKey1 = process.env.PRIVATE_KEY;
+    const privateKey2 = process.env.PRIVATE_KEY2;
     let myErc20Vote: MyERC20Vote;
-    let account1: SignerWithAddress
-
-    const [deployer] = await ethers.getSigners();
-    account1 = await ethers.getSigner("0x01825FD823d3Bc1806115B011980068bE6405C11")
+    
     const chainId = network.config.chainId;
     const tokenAddr = networkConfig[chainId]["myERC20Vote"];
+    const ERC20Votes_ABI = [
+        "function getVotes(address account) public view returns (uint256)",
+        "function delegate(address delegatee) public", 
+    ];
+    let deployer = new ethers.Wallet(privateKey1, provider);
+    let account1 = new ethers.Wallet(privateKey2, provider);
+    myErc20Vote = new ethers.Contract(tokenAddr, ERC20Votes_ABI, provider) as MyERC20Vote;
 
-    myErc20Vote = await ethers.getContractAt("MyERC20Vote", tokenAddr, deployer);
-    let deployerInitVotes = await myErc20Vote.getVotes(deployer.address);
-    let deployerInitVotesFormatted = deployerInitVotes.toString();
-    console.log(`Deployer initial votes before delegation are: ${deployerInitVotesFormatted}`);
-
-    const delegateTx1 = await myErc20Vote.delegate(deployer.address);
-    await delegateTx1.wait();
-    let deployerVotesAfterDel = await myErc20Vote.getVotes(deployer.address);
-    let deployerVotesAfterDelFormatted = deployerVotesAfterDel.toString();
-    console.log(`Deployer votes after self-delegation are: ${deployerVotesAfterDelFormatted}`);
-
-    let Account1InitVotes = await myErc20Vote.getVotes(account1.address);
-    let Account1InitVotesFormatted = Account1InitVotes.toString();
-    console.log(`Account 1 initial votes before delegation are: ${Account1InitVotesFormatted}`);
-
+    const votePowerDeployerBefore = await myErc20Vote.getVotes(deployer.address)
+    const votePowerAccount1Before = await myErc20Vote.getVotes(account1.address)
+    console.log(`Deployer voting power before is: ${votePowerDeployerBefore.toString()}`)
+    console.log(`Account1 voting power before is: ${votePowerAccount1Before.toString()}`)
+    const delegateTx1 = await myErc20Vote.connect(deployer).delegate(deployer.address);
+    await delegateTx1.wait()
     const delegateTx2 = await myErc20Vote.connect(account1).delegate(account1.address);
     await delegateTx2.wait();
-    let acc1VotesAfterDel = await myErc20Vote.getVotes(account1.address);
-    let acc1VotesAfterDelFormatted = acc1VotesAfterDel.toString();
-    console.log(`Account 1 votes after self-delegation are: ${acc1VotesAfterDelFormatted}`);
+    const votePowerDeployerAfter = await myErc20Vote.getVotes(deployer.address)
+    const votePowerAccount1After = await myErc20Vote.getVotes(account1.address)
+    console.log(`Deployer voting power after is: ${votePowerDeployerAfter.toString()}`)
+    console.log(`Account1 voting power before is: ${votePowerAccount1After.toString()}`)
 }
 
 
