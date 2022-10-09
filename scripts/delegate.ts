@@ -35,8 +35,6 @@ async function main() {
     console.log(`Account1 voting power before is: ${votePowerAccount1After.toString()}`)
 }
 
-
-
 main().catch((error) => {
     console.error(error);
     process.exitCode = 1;
