@@ -3,15 +3,18 @@ import * as dotenv from "dotenv";
 import { MyERC20Vote } from "../typechain-types";
 dotenv.config();
 import { developmentChains, networkConfig } from "../helper-hardhat-config";
+import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 
 
 
 async function main() {
     let myErc20Vote: MyERC20Vote;
+    let account1: SignerWithAddress
     const MINT_AMOUNT = ethers.utils.parseUnits("1", "ether");
     
 
-    const [deployer, account1] = await ethers.getSigners();
+    const [deployer] = await ethers.getSigners();
+    account1 = await ethers.getSigner("0x01825FD823d3Bc1806115B011980068bE6405C11");
     const chainId = network.config.chainId;
     const tokenAddr = networkConfig[chainId]["myERC20Vote"];
 
