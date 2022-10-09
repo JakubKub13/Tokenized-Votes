@@ -13,6 +13,7 @@ export const networkConfig: networkConfigInfo = {
 
     5: {
         name: "goerli",
+        myERC20Vote: "0x9828c2Ad0A705F3E8D21FE31A1a5edBFDfc67e1f",
     },
 
     1: {
