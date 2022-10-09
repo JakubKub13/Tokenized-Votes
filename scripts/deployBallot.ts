@@ -26,7 +26,7 @@ async function main() {
   tokenizedBallot = await tokenizedBallotFactory.deploy(convertStringArrayToBytes32(PROPOSALS), tokenAddr, 1) as TokenizedBallot;
   await tokenizedBallot.deployed();
   console.log(`Tokenized Ballot contract was deployed ad : ${tokenizedBallot.address}`);
-  const args: any[] = [convertStringArrayToBytes32(PROPOSALS), "0x5FbDB2315678afecb367f032d93F642f64180aa3", 1];
+  const args: any[] = [convertStringArrayToBytes32(PROPOSALS), tokenAddr, 1];
   
   // Verify the deployment
   if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
