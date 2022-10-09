@@ -4,8 +4,7 @@ import { network } from "hardhat";
 import * as dotenv from "dotenv";
 import { MyERC20Vote } from "../typechain-types";
 dotenv.config();
-import { developmentChains, networkConfig } from "../helper-hardhat-config";
-import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
+import { networkConfig } from "../helper-hardhat-config";
 
 const AMOUNT_TO_MINT = ethers.utils.parseUnits("1", "ether")
 
@@ -23,7 +22,7 @@ async function main() {
     "function mint(address to, uint256 amount) public",
     "function balanceOf(address account) public view returns (uint256)", 
   ];
-  let deployer = new ethers.Wallet(privateKey1, provider);
+  let deployer = new ethers.Wallet(privateKey1, provider)
   let account1 = new ethers.Wallet(privateKey2, provider);
   let account2 = new ethers.Wallet(privateKey3, provider);
   
@@ -45,7 +44,7 @@ async function main() {
   const mintTx2 = await myErc20Vote.connect(deployer).mint(account1.address, AMOUNT_TO_MINT);
   await mintTx2.wait();
   const mintTx3 = await myErc20Vote.connect(deployer).mint(account2.address, AMOUNT_TO_MINT);
-  await mintTx1.wait();
+  await mintTx3.wait();
 
   const amountOfTokAfterMintDeployer = await myErc20Vote.balanceOf(deployer.address);
   const amountOfTokAfterMintAccount1 = await myErc20Vote.balanceOf(account1.address);

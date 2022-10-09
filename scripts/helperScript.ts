@@ -6,8 +6,8 @@ import { providers } from "ethers";
 
 
 async function main() {
-    const AMOUNT_TO_MINT = ethers.utils.parseUnits("1", "ether")
-    console.log(AMOUNT_TO_MINT.toString());
+    const currentBlock = await ethers.provider.getBlock("latest");
+    console.log(`The current block number is ${currentBlock.number}`);
     
 }
 

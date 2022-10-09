@@ -29,7 +29,7 @@ contract TokenizedBallot {
 /// I can vote to a proposal and vote that amount in that proposal if I have 100 votes I can divide 50 votes for 1 50 votes for other
     function vote(uint256 proposal, uint256 amount) public {
         uint256 votingPower = votePower(msg.sender);
-        require(votingPower <= amount, "TokenizedBallot: Trying to vote with more vote than vote power available for this account");
+        require(votingPower >= amount, "TokenizedBallot: Trying to vote with more vote than vote power available for this account");
         votePowerSpent[msg.sender] += amount;
         proposals[proposal].voteCount += amount;
     }
