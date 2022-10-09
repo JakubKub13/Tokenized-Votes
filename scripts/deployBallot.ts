@@ -31,11 +31,11 @@ async function main() {
 
   const args: any[] = [convertStringArrayToBytes32(PROPOSALS), tokenAddr, 7740650];
   
-  // Verify the deployment
-  //if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
-  //  console.log("Verifying......")
-  //  await verify(tokenizedBallot.address, args)
-  //}
+  //Verify the deployment
+  if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
+   console.log("Verifying......")
+   await verify(tokenizedBallot.address, args)
+  }
 }
 
 
