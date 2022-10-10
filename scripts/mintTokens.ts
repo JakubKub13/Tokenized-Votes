@@ -34,9 +34,9 @@ async function main() {
   const amountOfTokBeforeMintAccount1 = await myErc20Vote.balanceOf(account1.address);
   const amountOfTokBeforeMintAccount2 = await myErc20Vote.balanceOf(account2.address);
   
-  console.log(amountOfTokBeforeMintDeployer.toString());
-  console.log(amountOfTokBeforeMintAccount1.toString());
-  console.log(amountOfTokBeforeMintAccount2.toString());
+  console.log(`Amount of tokens before mint Deployer: ${amountOfTokBeforeMintDeployer.toString()}`);
+  console.log(`Amount of tokens before mint Account 1: ${amountOfTokBeforeMintAccount1.toString()}`);
+  console.log(`Amount of tokens before mint Account 2: ${amountOfTokBeforeMintAccount2.toString()}`);
 
 
   const mintTx1 = await myErc20Vote.connect(deployer).mint(deployer.address, AMOUNT_TO_MINT);
@@ -50,9 +50,9 @@ async function main() {
   const amountOfTokAfterMintAccount1 = await myErc20Vote.balanceOf(account1.address);
   const amountOfTokAfterMintAccount2 = await myErc20Vote.balanceOf(account2.address);
 
-  console.log(amountOfTokAfterMintDeployer.toString());
-  console.log(amountOfTokAfterMintAccount1.toString());
-  console.log(amountOfTokAfterMintAccount2.toString());
+  console.log(`Amount of tokens after mint Deployer: ${amountOfTokAfterMintDeployer.toString()}`);
+  console.log(`Amount of tokens after mint Account 1: ${amountOfTokAfterMintAccount1.toString()}`);
+  console.log(`Amount of tokens after mint Account 2: ${amountOfTokAfterMintAccount2.toString()}`);
 }
 
 
