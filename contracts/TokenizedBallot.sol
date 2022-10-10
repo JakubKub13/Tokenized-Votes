@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.17;
+pragma solidity ^0.8.4;
 
 interface ITokenizedVotes {
     function getPastVotes(address, uint256) external view returns (uint256);
@@ -50,5 +50,11 @@ contract TokenizedBallot {
 
     function winnerName() external view returns (bytes32 winnerName_) {
         winnerName_ = proposals[winningProposal()].name;
+    }
+
+    function voteCountProp(uint256 _indexOfProposal) public view returns (uint256) {
+        Proposal storage proposal = proposals[_indexOfProposal];
+        uint propVoteCount = proposal.voteCount;
+        return propVoteCount;
     }
 }

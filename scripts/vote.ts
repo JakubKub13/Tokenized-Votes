@@ -39,11 +39,11 @@ async function main() {
     console.log(`Account 1's vote power before vote is ${votePowerAccount1Before.toString()}`);
     console.log(`Account 2's vote power before vote is ${votePowerAccount2Before.toString()}`);
 
-    const voteTx1 = await tokenizedBallot.connect(deployer).vote(1, AMOUNT_TO_VOTE);
+    const voteTx1 = await tokenizedBallot.connect(deployer).vote(2, AMOUNT_TO_VOTE);
     await voteTx1.wait();
-    const voteTx2 = await tokenizedBallot.connect(account1).vote(1, AMOUNT_TO_VOTE);
+    const voteTx2 = await tokenizedBallot.connect(account1).vote(2, AMOUNT_TO_VOTE);
     await voteTx2.wait();
-    const voteTx3 = await tokenizedBallot.connect(account2).vote(1, AMOUNT_TO_VOTE);
+    const voteTx3 = await tokenizedBallot.connect(account2).vote(2, AMOUNT_TO_VOTE);
     await voteTx3.wait();
 
     const votePowerDeployerAfter = await tokenizedBallot.votePower(deployer.address);

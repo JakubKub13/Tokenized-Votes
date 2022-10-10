@@ -24,7 +24,7 @@ async function main() {
   const bytes32Proposals = convertStringArrayToBytes32(PROPOSALS);
 
   const tokenizedBallotFactory = await ethers.getContractFactory("TokenizedBallot");
-  const tokenizedBallot = await tokenizedBallotFactory.deploy(bytes32Proposals, tokenAddr, 7740650) as TokenizedBallot;
+  const tokenizedBallot = await tokenizedBallotFactory.deploy(bytes32Proposals, tokenAddr, 7745008) as TokenizedBallot;
   await tokenizedBallot.deployed()
   console.log(`Tokenized Ballot contract was deployed ad : ${tokenizedBallot.address}`);
 
