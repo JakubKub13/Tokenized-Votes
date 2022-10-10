@@ -56,8 +56,8 @@ async function main() {
     
     const winner = await tokenizedBallot.winnerName();
     const indexWinner = await tokenizedBallot.winningProposal();
-    console.log(winner);
-    console.log(indexWinner.toString());
+    console.log(`The name of winning proposal is ${winner}`);
+    console.log(`The index of winning proposal in array is: ${indexWinner}`);
     
 }
 
