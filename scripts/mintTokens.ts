@@ -9,7 +9,7 @@ import { networkConfig } from "../helper-hardhat-config";
 const AMOUNT_TO_MINT = ethers.utils.parseUnits("1", "ether")
 
 async function main() {
-  const provider = new ethers.providers.JsonRpcProvider(process.env.GOERLI_RPC_URL)
+  const provider =  (process.env.GOERLI_RPC_URL)
   const privateKey1 = process.env.PRIVATE_KEY;
   const privateKey2 = process.env.PRIVATE_KEY2;
   const privateKey3 = process.env.PRIVATE_KEY3;
